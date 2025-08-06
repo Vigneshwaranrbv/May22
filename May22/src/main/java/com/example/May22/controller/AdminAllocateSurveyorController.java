@@ -33,6 +33,7 @@ public class AdminAllocateSurveyorController {
 		model.addAttribute("policyId", policyId);
 		model.addAttribute("customername", customername);
         System.out.println("First push");
+        System.out.println("Hi hello");
 		List<Surveyor> surveyors = adminallocatesurveyorservice.getAllSurveyors();
 		model.addAttribute("surveyors", surveyors);
 		// System.out.println("Surveyors:" + surveyors + "ID:");
