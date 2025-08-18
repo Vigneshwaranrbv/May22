@@ -116,7 +116,8 @@
                       <input type="hidden" name="customerid" value="${viewclaim.customerid}" />
                       <input type="hidden" name="customername" value="${viewclaim.customername}" />
                       <input type="hidden" name="surveyorid" value="${viewclaim.surveyor.surveyorid}" />
-                      <button type="submit" name="status" value=""><i class="fa fa-upload"></i> Upload Report</button>
+                      <input type="hidden" name="status" value="${viewclaim.status}" />
+                      <button type="submit" name="survstatus" value=""><i class="fa fa-upload"></i> Upload Report</button>
                     </form>
                 </td>
             </tr>

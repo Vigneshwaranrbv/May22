@@ -1,5 +1,6 @@
 package com.example.May22.service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class CustomerDocumentImpl implements CustomerDocumentService{
     private CustomerDocumentRepository customerdocumentrepository;
     
 	@Override
-    public void uploadReport(Long customerid, Long surveyorid, MultipartFile file, String status) throws Exception {
+    public void uploadReport(Long customerid, Long surveyorid, MultipartFile file, String survstatus) throws Exception {
 
         Optional<Customer> customerOpt = customerapplyrepository.findById(customerid);
         Optional<Surveyor> surveyorOpt = surveyorrepository.findById(surveyorid);
@@ -33,6 +34,7 @@ public class CustomerDocumentImpl implements CustomerDocumentService{
         if (customerOpt.isEmpty() || surveyorOpt.isEmpty()) {
             throw new Exception("Invalid customer or surveyor ID");
         }
+        
 
         CustomerDocument cd = new CustomerDocument();
         cd.setCustomer(customerOpt.get());
@@ -40,11 +42,13 @@ public class CustomerDocumentImpl implements CustomerDocumentService{
         cd.setFilename(file.getOriginalFilename());
         cd.setFiletype(file.getContentType());
         cd.setFiledata(file.getBytes());
-        cd.setStatus(status);
-
+        cd.setUploadDate(LocalDateTime.now());
+        cd.setsurvStatus(survstatus);
         customerdocumentrepository.save(cd);
-
-        //return "Report uploaded successfully";
      
+        //Surveyor assign update the customer status 
+        Customer customer = customerOpt.get();
+        customer.setStatus("Document Uploaded");
+        customerapplyrepository.save(customer);
 	}
 }

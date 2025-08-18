@@ -1,12 +1,16 @@
 package com.example.May22.entity;
 
 import java.time.LocalDateTime;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 
 @Entity
 public class CustomerDocument {
@@ -25,11 +29,15 @@ public class CustomerDocument {
 	 
      private String filename;
      private String filetype;
+     @Lob
+     @Column(columnDefinition = "LONGBLOB")
      private byte[] filedata;
-     private String status;
-     private LocalDateTime uploadAt;
+     private String survstatus;
+     @Column(name = "upload_date", columnDefinition = "DATETIME")
+     private LocalDateTime uploadDate;
+     
 	 public CustomerDocument(Long documentid, Customer customer, Surveyor surveyor, String filename, String filetype,
-			byte[] filedata, String status, LocalDateTime uploadAt) {
+			byte[] filedata, String survstatus, LocalDateTime uploadDate) {
 		super();
 		this.documentid = documentid;
 		this.customer = customer;
@@ -37,8 +45,8 @@ public class CustomerDocument {
 		this.filename = filename;
 		this.filetype = filetype;
 		this.filedata = filedata;
-		this.status = status;
-		this.uploadAt = uploadAt;
+		this.survstatus = survstatus;
+		this.uploadDate = uploadDate;
 	}
 	public CustomerDocument() {
 		super();
@@ -80,16 +88,21 @@ public class CustomerDocument {
 	public void setFiledata(byte[] filedata) {
 		this.filedata = filedata;
 	}
-	public String getStatus() {
-		return status;
+	public String getsurvStatus() {
+		return survstatus;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setsurvStatus(String survstatus) {
+		this.survstatus = survstatus;
 	}
-	public LocalDateTime getUploadAt() {
-		return uploadAt;
+	public LocalDateTime getUploadDate() {
+		return uploadDate;
 	}
-	public void setUploadAt(LocalDateTime uploadAt) {
-		this.uploadAt = uploadAt;
+	@PrePersist
+	public void prePersist() {
+		this.uploadDate = LocalDateTime.now();
+	}
+	public void setUploadDate(LocalDateTime now) {
+		// TODO Auto-generated method stub
+		
 	}
 }

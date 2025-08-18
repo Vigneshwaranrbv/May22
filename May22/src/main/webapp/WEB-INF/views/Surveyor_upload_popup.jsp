@@ -3,6 +3,7 @@
     String customerid = request.getParameter("customerid");
     String customername = request.getParameter("customername");
     String surveyorid = request.getParameter("surveyorid");
+    String status = request.getParameter("status");
 %>
 
 <!DOCTYPE html>
@@ -86,16 +87,17 @@
         <p><strong>Customer ID:</strong> <%= customerid %></p>
         <p><strong>Customer Name:</strong> <%= customername %></p>
         <p><strong>Surveyor ID:</strong> <%= surveyorid %></p>
+        <p><strong>Admin Claim Request:</strong> <%= status %></p>
 
-        <form action="submitReport" method="post" enctype="multipart/form-data">
+        <form action="/cs/upload" method="post" enctype="multipart/form-data">
             <input type="hidden" name="customerid" value="<%= customerid %>">
             <input type="hidden" name="surveyorid" value="<%= surveyorid %>">
 
             <label for="reportFile">Select Report File:</label>
-            <input type="file" name="reportFile" id="reportFile" required>
+            <input type="file" name="file" id="reportFile" required>
 
             <label for="status">Select Status:</label>
-            <select name="status" id="status" required>
+            <select name="survstatus" id="status" required>
                 <option value="">-- Select --</option>
                 <option value="Approved">Approved</option>
                 <option value="Rejected">Rejected</option>

@@ -1,7 +1,9 @@
 package com.example.May22.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -32,6 +35,20 @@ public class Customer {
 	private Long duration;
 	private String nominee;
 	private String status;
+	
+	//Surveyor assign customer table to update status
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+	private List<CustomerDocument> documents;
+    
+  //Surveyor assign customer table to update status
+  	public List<CustomerDocument> getDocuments() {
+          return documents;
+      }
+
+      public void setDocuments(List<CustomerDocument> documents) {
+          this.documents = documents;
+      }
+	
 	@Lob
 	@Column(columnDefinition = "LONGBLOB")
 	private byte[] filedata;	
@@ -56,7 +73,7 @@ public class Customer {
 		this.status = status;
 		this.surveyor = surveyor;
 	}
-
+    //Admin assign surveyor_id relationship
 	@ManyToOne
 	@JoinColumn(name = "surveyorid")
 	private Surveyor surveyor;
@@ -68,7 +85,7 @@ public class Customer {
 	public void setSurveyor(Surveyor surveyor) {
 		this.surveyor = surveyor;
 	}
-
+	
 	public Customer(Long customerid, Long policyId, String policyname, String policytype, Double premiumamount,
 			String customername, String email, String mobilenumber, LocalDate startdate, Long duration, String nominee,
 			String status) {
@@ -211,4 +228,5 @@ public class Customer {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 }
