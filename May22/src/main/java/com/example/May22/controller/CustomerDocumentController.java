@@ -27,16 +27,7 @@ public class CustomerDocumentController {
             customerdocumentservice.uploadReport(customerid, surveyorid, file, survstatus);
             model.addAttribute("message","Document upload successfully");
         } catch (Exception e) {
-        	System.out.println("Hi hello");
-        	System.out.println("Good morning");
-        	System.out.println("Good afternoon");
-
-        	System.out.println("I am vigneshwaran");
-        	System.out.println(" from chinnasalem");
-        	System.out.println(" gratuted BE");
-        	
-        	System.out.println("add more line");
-            model.addAttribute("error","Error upload report:"+e.getMessage());
+                  model.addAttribute("error","Error upload report:"+e.getMessage());
         }
         return "Surveyor_home";
     }
