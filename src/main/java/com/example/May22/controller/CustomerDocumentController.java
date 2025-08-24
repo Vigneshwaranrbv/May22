@@ -24,6 +24,7 @@ public class CustomerDocumentController {
             customerdocumentservice.uploadReport(customerid, surveyorid, file, status);
             System.out.println("hi hello");
             System.out.println("this vignesh");
+            System.out.println("this kovilamballam");
         } catch (Exception e) {
             e.printStackTrace();
         }
