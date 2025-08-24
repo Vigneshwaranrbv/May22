@@ -23,6 +23,7 @@ public class CustomerDocumentController {
         try {
             customerdocumentservice.uploadReport(customerid, surveyorid, file, status);
             System.out.println("hi hello");
+            System.out.println("this vignesh");
         } catch (Exception e) {
             e.printStackTrace();
         }
