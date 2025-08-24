@@ -22,7 +22,7 @@ public class CustomerDocumentController {
             @RequestParam("status") String status) {
         try {
             customerdocumentservice.uploadReport(customerid, surveyorid, file, status);
-            
+            System.out.println("hi hello");
         } catch (Exception e) {
             e.printStackTrace();
         }
