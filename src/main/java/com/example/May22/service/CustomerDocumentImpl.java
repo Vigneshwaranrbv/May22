@@ -1,5 +1,6 @@
 package com.example.May22.service;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import com.example.May22.entity.CustomerDocument;
 import com.example.May22.entity.Surveyor;
 import com.example.May22.repository.CustomerApplyRepository;
 import com.example.May22.repository.CustomerDocumentRepository;
+import com.example.May22.repository.StudentRepository;
 import com.example.May22.repository.SurveyorRepository;
 @Service
 public class CustomerDocumentImpl implements CustomerDocumentService{
@@ -23,7 +25,7 @@ public class CustomerDocumentImpl implements CustomerDocumentService{
 
     @Autowired 
     private CustomerDocumentRepository customerdocumentrepository;
-    
+        
 	@Override
     public void uploadReport(Long customerid, Long surveyorid, MultipartFile file, String status) throws Exception {
 
@@ -41,10 +43,10 @@ public class CustomerDocumentImpl implements CustomerDocumentService{
         cd.setFiletype(file.getContentType());
         cd.setFiledata(file.getBytes());
         cd.setStatus(status);
-
         customerdocumentrepository.save(cd);
-
-        //return "Report uploaded successfully";
-     
+        
+        Customer customer = customerapplyrepository.findById(customerid).orElseThrow(() ->new RuntimeException("Customer not found"));
+        customer.setStatus("Document Uploaded");
+        customerapplyrepository.save(customer);
 	}
 }

@@ -107,7 +107,7 @@
             <th>Duration</th>
             <th>Start Date</th>
             <th>Nominee</th>
-            <th>File Data</th>
+            <th>Customer Proof</th>
             <th>Status</th>
             <th>Action</th>
         </tr>

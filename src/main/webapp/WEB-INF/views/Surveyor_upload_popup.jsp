@@ -87,13 +87,11 @@
         <p><strong>Customer Name:</strong> <%= customername %></p>
         <p><strong>Surveyor ID:</strong> <%= surveyorid %></p>
 
-        <form action="submitReport" method="post" enctype="multipart/form-data">
+        <form action="/sr/upload" method="post" enctype="multipart/form-data">
             <input type="hidden" name="customerid" value="<%= customerid %>">
             <input type="hidden" name="surveyorid" value="<%= surveyorid %>">
-
             <label for="reportFile">Select Report File:</label>
-            <input type="file" name="reportFile" id="reportFile" required>
-
+            <input type="file" name="filedata" id="reportFile" required>
             <label for="status">Select Status:</label>
             <select name="status" id="status" required>
                 <option value="">-- Select --</option>
@@ -101,7 +99,6 @@
                 <option value="Rejected">Rejected</option>
                 <option value="Hold">Hold</option>
             </select>
-
             <button type="submit">Submit Report</button>
         </form>
     </div>

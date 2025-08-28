@@ -1,12 +1,16 @@
 package com.example.May22.entity;
 
 import java.time.LocalDateTime;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class CustomerDocument {
@@ -25,8 +29,13 @@ public class CustomerDocument {
 	 
      private String filename;
      private String filetype;
+     @Lob
+     @Column(columnDefinition = "LONGBLOB")
      private byte[] filedata;
      private String status;
+     @CreationTimestamp
+     @Column(name ="uploadAt", updatable = false)
+		/* @DateTimeFormat(pattern = "yyyy-MM-dd") */
      private LocalDateTime uploadAt;
 	 public CustomerDocument(Long documentid, Customer customer, Surveyor surveyor, String filename, String filetype,
 			byte[] filedata, String status, LocalDateTime uploadAt) {
