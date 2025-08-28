@@ -106,9 +106,10 @@
             <th>Mobile Number</th>
             <th>Duration</th>
             <th>Start Date</th>
-            <th>Nominee</th>
+            <th>Nominee Name</th>
             <th>Customer Proof</th>
             <th>Status</th>
+            <th>Customer Document</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -137,6 +138,18 @@
                 </c:choose>
                 </td>
                 <td>${appliedpolicies.status}</td>
+                <td><c:choose>
+    <c:when test="${not empty appliedpolicies.filedata}">
+      <button class="btn btn-primary viewDocBtn" 
+              data-url="/aas/downloadfile?customerid=${appliedpolicies.customerid}">
+        View / Download
+      </button>
+    </c:when>
+    <c:otherwise>
+      No File Uploaded
+    </c:otherwise>
+  </c:choose>
+  </td>
                 <td>
                 <c:choose>
   <c:when test="${appliedpolicies.status eq 'Claim Request'}">
