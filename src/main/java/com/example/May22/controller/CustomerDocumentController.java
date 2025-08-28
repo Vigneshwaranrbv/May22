@@ -24,6 +24,16 @@ public class CustomerDocumentController {
             @RequestParam("filedata") MultipartFile filedata,
             @RequestParam("status") String status) {
         try {
+        	/*K
+        	 *KA
+        	 * KAN
+        	 * KANI
+        	 * KANIS
+        	 * KANISH
+        	 * KANISHK
+        	 * KANISHKA
+        	 * */
+        	
             customerdocumentservice.uploadReport(customerid, surveyorid, filedata, status);
 		 } catch (Exception e) {
             e.printStackTrace();
